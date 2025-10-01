@@ -6,39 +6,34 @@ Consejo: el método update({clave: valor}) sirve para añadir o modificar un ele
 '''
 
 class AgendaTelefonica:
-    def __init__(self):
-        self.contactos = []
+    def __init__(self, contactos={}):
+        self.contactos = contactos
 
-    def añadir_contacto(self, contacto):
-        self.contactos.append(contacto)
-        print(f"Contacto añadido! - {contacto}")
+    def añadir_contacto(self, nombre, telefono):
+        self.contactos.update({ nombre: telefono})
+        print(f"¡Contacto añadido! - {nombre}: {telefono}")
     
-    def modificar_contacto(self, contacto):
-        for c in self.contactos:
-            if c["nombre"] == contacto["nombre"]:
-                c["telefono"] = contacto["telefono"]
-                print("¡Contacto modificado!")
+    def modificar_contacto(self, nombre, telefono):
+        self.contactos.update({ nombre: telefono})
+        print(f"¡Contacto modificado! - {nombre}: {telefono}")
 
     def eliminar_contacto(self, nombre):
-        i = 0
-        for c in self.contactos:
-            if c["nombre"] == nombre:
-                self.contactos.pop(i)
-                print("¡Contacto eliminado!")
-            i += 1
+        self.contactos.pop(nombre)
+        print(f"¡Contacto borrado!")
 
     def __str__(self):
         print(f"Lista de contactos: {self.contactos}")
 
 ag = AgendaTelefonica()
 
-ag.añadir_contacto({ "nombre": "Pepe", "telefono": 655464646})
-ag.añadir_contacto({ "nombre": "Juan", "telefono": 666555666})
+ag.añadir_contacto("Pepe", 655464646)
+ag.añadir_contacto("Juan", 666777666)
 
 ag.__str__()
 
 
-ag.modificar_contacto({ "nombre": "Juan", "telefono": 77755777})
+ag.modificar_contacto("Pepe", 788555788)
+ag.__str__()
 ag.eliminar_contacto("Pepe")
 
 ag.__str__()
